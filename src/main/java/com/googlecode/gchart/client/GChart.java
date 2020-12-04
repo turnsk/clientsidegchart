@@ -63,6 +63,9 @@ import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
 import com.google.gwt.core.client.GWT;
 
 /**
@@ -5651,12 +5654,29 @@ public class GChart extends Composite implements HasClickHandlers,
     private int width = DEFAULT_SYMBOL_WIDTH;
     double xScaleFactor = 1.0;
     double yScaleFactor = 1.0;
+    
+    private HashMap<String, String> attributes = null;
 
     Symbol(Curve parent) {
       super();
       this.parent = parent;
     }
 
+    public HashMap<String, String> getAttributesMap() {
+    	return attributes;
+    }
+    
+    /**
+     * Adds image element attribute.
+     * @param key
+     * @param value
+     */
+    public void addAttribute(String key, String value) {
+    	if ( key != null && !key.trim().isEmpty() )
+	    	if ( attributes == null )
+	    		attributes = new HashMap<String, String>();
+	    	attributes.put(key, value);
+    }
     /**
      * Returns the background or fill color of this symbol.
      * 
@@ -12143,7 +12163,7 @@ public class GChart extends Composite implements HasClickHandlers,
         grp.renderBorderedImage(symbol.getBackgroundColorCSS(), symbol
             .getBorderColorCSS(), symbol.getBorderStyle(),
             borderWidth, symWidth, symHeight, xLeft, yTop, symbol
-            .getImageURL());
+            .getImageURL(), symbol.getAttributesMap());
       }
       // if the image has an attached label, realize that
       if (annotation != null
@@ -13596,7 +13616,7 @@ public class GChart extends Composite implements HasClickHandlers,
       void setReusableProperties(String backgroundColor,
           String borderColor, String borderStyle, int borderWidth,
           double dWidth, double dHeight, double xD, double yD,
-          String url) {
+          String url, HashMap<String, String> attributes) {
 
         // Round two edges, and define width to be their difference.
         // (rounding this way assures bars align with gridlines, etc.)
@@ -13733,6 +13753,11 @@ public class GChart extends Composite implements HasClickHandlers,
           setUrl(url);
           this.url = url;
         }
+        
+        if ( attributes != null )
+        	for ( Entry<String, String> s : attributes.entrySet() ) {
+        		DOM.asOld(getElement()).setAttribute(s.getKey(), s.getValue());
+        	}
       }
     } // end of class ReusableImage
 
@@ -13818,7 +13843,7 @@ public class GChart extends Composite implements HasClickHandlers,
      */
     void addOrRevealImage(String backgroundColor, String borderColor,
         String borderStyle, int borderWidth, double width,
-        double height, double x, double y, String url) {
+        double height, double x, double y, String url, HashMap<String, String> attributes) {
       ReusableImage img;
       if (imageIndex < imagePanel.getWidgetCount()) { // reuse an old image
         img = (ReusableImage) imagePanel.getWidget(imageIndex);
@@ -13835,7 +13860,7 @@ public class GChart extends Composite implements HasClickHandlers,
       }
 
       img.setReusableProperties(backgroundColor, borderColor,
-          borderStyle, borderWidth, width, height, x, y, url);
+          borderStyle, borderWidth, width, height, x, y, url, attributes);
 
       if (lastVisibleImage < imageIndex)
         lastVisibleImage = imageIndex;
@@ -13907,7 +13932,7 @@ public class GChart extends Composite implements HasClickHandlers,
 
     public void renderBorderedImage(String backgroundColor,
         String borderColor, String borderStyle, int borderWidth,
-        double width, double height, double x, double y, String url) {
+        double width, double height, double x, double y, String url, HashMap<String, String> attributes) {
       // if (null != canvas && url == getBlankImageURL() &&
       // (borderStyle == USE_CSS || borderStyle.equals("solid")))
       /*
@@ -13923,7 +13948,7 @@ public class GChart extends Composite implements HasClickHandlers,
       // x, y);
       // else // use an actual image HTML element
       addOrRevealImage(backgroundColor, borderColor, borderStyle,
-          borderWidth, width, height, x, y, url);
+          borderWidth, width, height, x, y, url, attributes);
 
     }
 
