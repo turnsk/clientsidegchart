@@ -32,7 +32,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'sk.turn'
             artifactId = 'clientsidegchart'
-            version = '2.7'
+            version = '2.7-tt'
             artifact customJar
         }
     }
