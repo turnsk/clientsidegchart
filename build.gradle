@@ -1,12 +1,13 @@
 plugins {
     id 'java-library'
+    id 'maven-publish'
 }
 
 archivesBaseName = 'gchart'
 version = '2.7-tt'
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 sourceCompatibility = 1.8
@@ -22,6 +23,17 @@ dependencies {
     compileOnly "com.google.gwt:gwt-user:2.8.1"
 }
 
-jar {
+tasks.register('customJar', Jar) {
     from sourceSets.main.java.srcDirs
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'sk.turn'
+            artifactId = 'clientsidegchart'
+            version = '2.7'
+            artifact customJar
+        }
+    }
 }
