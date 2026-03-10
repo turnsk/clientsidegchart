@@ -13,17 +13,13 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-java {
-    withJavadocJar()
-    withSourcesJar()
-}
-
 dependencies {
     // GWT client only
     compileOnly "com.google.gwt:gwt-user:2.8.1"
 }
 
 tasks.register('customJar', Jar) {
+    archiveBaseName = 'clientsidegchart'
     from sourceSets.main.java.srcDirs
 }
 
