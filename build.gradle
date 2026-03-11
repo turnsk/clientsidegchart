@@ -10,16 +10,27 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    withJavadocJar()
+    withSourcesJar()
+}
+
+javadoc {
+    // Don't try to javadoc external GWT classes, which are not on the classpath and would cause errors
+    options.addStringOption('sourcepath', sourceSets.main.java.srcDirs.join(File.pathSeparator))
+    // allows legacy HTML like <tt>
+    options.addBooleanOption('Xdoclint:none', true)
+}
 
 dependencies {
     // GWT client only
     compileOnly "com.google.gwt:gwt-user:2.8.1"
 }
 
-tasks.register('customJar', Jar) {
-    archiveBaseName = 'clientsidegchart'
+jar {
+    // GWT libraries need to have sources in the main jar
     from sourceSets.main.java.srcDirs
 }
 
@@ -29,7 +40,7 @@ publishing {
             groupId = 'sk.turn'
             artifactId = 'clientsidegchart'
             version = '2.7'
-            artifact customJar
+            from components.java
         }
     }
 }
