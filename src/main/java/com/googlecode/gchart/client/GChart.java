@@ -934,7 +934,7 @@ public class GChart extends Composite implements HasClickHandlers,
      * 
      * @param tickLabel
      *          the label for this tick. HTML is supported in tick labels, but
-     *          it must be prefixed by <tt>&lt;html&gt</tt>. See the
+     *          it must be prefixed by <tt>&lt;html&gt;</tt>. See the
      *          {@link Curve.Point#setAnnotationText(String,int,int)
      *          setAnnotationText} method for more information.
      * 
@@ -993,7 +993,7 @@ public class GChart extends Composite implements HasClickHandlers,
      *          is displayed.
      * 
      * @param tickLabel
-     *          the plain text or (<tt>&lt;html&gt</tt>-prefixed) HTML defining
+     *          the plain text or (<tt>&lt;html&gt;</tt>-prefixed) HTML defining
      *          the tick's label.
      * 
      * @see #addTick(double,String,int,int) addTick(double,String,int,int)
@@ -4692,11 +4692,11 @@ public class GChart extends Composite implements HasClickHandlers,
        * of methods.
        * <p>
        * 
-       * <b>To use HTML, <i>your text must begin with</i> <tt>&lt;html&gt</tt>
+       * <b>To use HTML, <i>your text must begin with</i> <tt>&lt;html&gt;</tt>
        * </b> (otherwise, GChart will treat it as plain text). Note that the
-       * leading <tt>&lt;html&gt</tt> is stripped off by GChart before your HTML
+       * leading <tt>&lt;html&gt;</tt> is stripped off by GChart before your HTML
        * gets to the browser. Since it's just a flag for GChart, not a real HTML
-       * tag, you should <i>not</i> use a closing <tt>&lt;/html&gt</tt> at the
+       * tag, you should <i>not</i> use a closing <tt>&lt;/html&gt;</tt> at the
        * end.
        * <p>
        * 
@@ -4743,7 +4743,7 @@ public class GChart extends Composite implements HasClickHandlers,
        * <p>
        * 
        * @param annotationText
-       *          the text or (<tt>&lt;html&gt</tt> prefixed) HTML of this
+       *          the text or (<tt>&lt;html&gt;</tt> prefixed) HTML of this
        *          point's annotation, or <tt>null</tt> to remove all annotation.
        * 
        * @param widthUpperBound
@@ -4789,7 +4789,7 @@ public class GChart extends Composite implements HasClickHandlers,
        * <p>
        * 
        * @param annotationText
-       *          the text or (<tt>&lt;html&gt</tt>-prefixed) HTML of this
+       *          the text or (<tt>&lt;html&gt;</tt>-prefixed) HTML of this
        *          point's annotation, or <tt>null</tt> to remove all annotation.
        * 
        * @see #setAnnotationText(String, int, int)
@@ -4944,7 +4944,7 @@ public class GChart extends Composite implements HasClickHandlers,
        * with the shifts specified by this method aligned with the
        * outward-pointing pie radius that bisects the pie slice. This convention
        * makes it easy to move pie slice annotations radially outward (via
-       * <tt>xShift > 0</tt>) or radially inward (via <tt>xShift < 0</tt>). For
+       * <tt>xShift > 0</tt>) or radially inward (via <tt>xShift &lt; 0</tt>). For
        * those rare situations where you may need to move a pie annotation
        * perpendicularly to this radius, use <tt>setAnnotationYShift</tt>.
        * 
@@ -8666,7 +8666,7 @@ public class GChart extends Composite implements HasClickHandlers,
      * orientation of the second edge of the pie slice).
      * <p>
      * 
-     * When specified explicitly, the value must be a fraction >= 0 and < 1,
+     * When specified explicitly, the value must be a fraction >= 0 and &lt; 1,
      * with 0 representing due south, 0.25 an additional clockwise angular
      * rotation (starting at due south) that is 25% of the full, 360 degree
      * rotation (and thus, if you can follow these gyrations, is due west), 0.5
@@ -14930,10 +14930,10 @@ public class GChart extends Composite implements HasClickHandlers,
      * 
      * @see #touch touch
      * @see #getTouchedPoint getTouchedPoint
-     * @see #setHoverWidget setHoverWidget
-     * @see #setHovertextTemplate setHovertextTemplate
-     * @see #setHoverAnnotationEnabled setHoverAnnotationEnabled
-     * @see #setHoverSelectionEnabled setHoverSelectionEnabled
+     * @see Symbol#setHoverWidget setHoverWidget
+     * @see Symbol#setHovertextTemplate setHovertextTemplate
+     * @see Symbol#setHoverAnnotationEnabled setHoverAnnotationEnabled
+     * @see Symbol#setHoverSelectionEnabled setHoverSelectionEnabled
      * @see HoverUpdateable HoverUpdateable
      * @see #setHoverParameterInterpreter setHoverParameterInterpreter
      * @see HoverParameterInterpreter HoverParameterInterpreter
@@ -19087,7 +19087,7 @@ public class GChart extends Composite implements HasClickHandlers,
    * The default overall font family is <tt>DEFAULT_FONT_FAMILY</tt>.
    * 
    * @see Axis#setTickLabelFontFamily setTickLabelFontFamily
-   * @see Point#setAnnotationFontFamily setAnnotationFontFamily
+   * @see Curve.Point#setAnnotationFontFamily setAnnotationFontFamily
    * @see #setLegendFontFamily setLegendFontFamily
    * @see #DEFAULT_FONT_FAMILY DEFAULT_FONT_FAMILY
    * 
