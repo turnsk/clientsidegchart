@@ -4,7 +4,7 @@ plugins {
 }
 
 archivesBaseName = 'gchart'
-version = '2.7-tt'
+version = '2.7.1'
 
 repositories {
     mavenCentral()
@@ -39,7 +39,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'sk.turn'
             artifactId = 'clientsidegchart'
-            version = '2.7-tt'
+            version = '2.7.1'
             from components.java
         }
     }
