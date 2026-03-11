@@ -3,7 +3,6 @@ plugins {
     id 'maven-publish'
 }
 
-archivesBaseName = 'gchart'
 version = '2.7.1'
 
 repositories {
@@ -32,6 +31,12 @@ dependencies {
 jar {
     // GWT libraries need to have sources in the main jar
     from sourceSets.main.java.srcDirs
+    manifest {
+        attributes(
+            'Implementation-Title': 'Client Side GChart',
+            'Implementation-Version': project.version
+        )
+    }
 }
 
 publishing {
@@ -39,7 +44,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'sk.turn'
             artifactId = 'clientsidegchart'
-            version = '2.7.1'
+            version = project.version
             from components.java
         }
     }
